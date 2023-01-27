@@ -8,8 +8,9 @@ public class Sapo extends Thread {
 	private int saltoMax = 5;
 	private int saltoAtual;
 	private int distanciaPecorrida = 0;
-	private ArrayList<Sapo> colocacao;
+	private ArrayList<String> colocacao = new ArrayList<String>();
 	private int distanciaMax = 30;
+	private int i = 0;
 
 	public Sapo(String nome) {
 		this.nome = nome;
@@ -56,30 +57,36 @@ public class Sapo extends Thread {
 	public void run() {
 		// sortear valor aqui
 		// this.setSaltoAtual(SorteandoValor());
-		while (this.getDistanciaPecorrida() < this.getDistanciaMax()) {
-			// falta colocar o valor do salto aleatorio
-			this.setSaltoAtual(SorteandoValor());
-			this.distanciaPecorrida += getSaltoAtual();
-			// falta mostrar o relatorio da corrida
-			Relatorio();
+		synchronized (this) {
+			while (this.getDistanciaPecorrida() < this.getDistanciaMax()) {
+				// falta colocar o valor do salto aleatorio
+
+				this.setSaltoAtual(SorteandoValor());
+				this.distanciaPecorrida += getSaltoAtual();
+				Relatorio();
+				// falta mostrar o relatorio da corrida
+
+			}
 		}
-	
+		Podio();
 
 	}
 
-	public void Podio() {
-		for (int i = 0; i < this.colocacao.size(); i++) {
-            if(i==0) {
-            	System.out.println("1-" + this.colocacao.get(i).nome);
-            }
-            System.out.println(this.colocacao.get(i).nome);
+	public synchronized void Podio() {
+		try {
+			sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+        System.out.println("Temos um vencedor:");
+		System.out.println(i++ + "-" + this.nome);
 	}
 
-	public void Relatorio() {
-		System.out.println("=====" + getNome() + "=====");
-		System.out.println("tamanho do salto: " + getSaltoAtual());
-		System.out.println("distancia pecorriada: " + getDistanciaPecorrida());
+	public synchronized void Relatorio() {
+		System.out.println("=====" + this.getNome() + "=====");
+		System.out.println("tamanho do salto: " + this.getSaltoAtual());
+		System.out.println("distancia pecorriada: " + this.getDistanciaPecorrida());
 
 		try {
 			sleep(1500);
