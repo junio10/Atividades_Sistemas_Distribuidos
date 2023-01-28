@@ -55,38 +55,38 @@ public class Sapo extends Thread {
 	}
 
 	public void run() {
+          Corrida();
+  		  System.out.println(this.nome);
+          return;        
+	}
+
+	public void Corrida() {
 		// sortear valor aqui
 		// this.setSaltoAtual(SorteandoValor());
-		synchronized (this) {
-			while (this.getDistanciaPecorrida() < this.getDistanciaMax()) {
-				// falta colocar o valor do salto aleatorio
 
-				this.setSaltoAtual(SorteandoValor());
-				this.distanciaPecorrida += getSaltoAtual();
-				Relatorio();
-				// falta mostrar o relatorio da corrida
+		while (this.getDistanciaPecorrida() < this.getDistanciaMax()) {
+			// falta colocar o valor do salto aleatorio
 
-			}
+			this.setSaltoAtual(SorteandoValor());
+			this.distanciaPecorrida += getSaltoAtual();
+			Relatorio();
+			// falta mostrar o relatorio da corrida
+
 		}
-		Podio();
+
+		// Podio();
 
 	}
 
-	public synchronized void Podio() {
-		try {
-			sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        System.out.println("Temos um vencedor:");
+	public void Podio() {
+		System.out.println("Temos um vencedor:");
 		System.out.println(i++ + "-" + this.nome);
 	}
 
-	public synchronized void Relatorio() {
+	public void Relatorio() {
 		System.out.println("=====" + this.getNome() + "=====");
 		System.out.println("tamanho do salto: " + this.getSaltoAtual());
-		System.out.println("distancia pecorriada: " + this.getDistanciaPecorrida());
+		System.out.println("distancia pecorrida: " + this.getDistanciaPecorrida());
 
 		try {
 			sleep(1500);

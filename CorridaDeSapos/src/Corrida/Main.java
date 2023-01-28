@@ -5,18 +5,23 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		new Sapo("Cedrico").start();
-		new Sapo("Harry").start();
-	    new Sapo("Hermione").start();
-		new Sapo("Rony").start();
-		new Sapo("Neville").start();
+		Thread s1 = new Thread(new Sapo("Cedrico"));
+		Thread s2 = new Thread(new Sapo("harry"));
+		Thread s3 = new Thread(new Sapo("hermione"));
+	    Thread s4 = new Thread(new Sapo("Rony"));
+	    Thread s5 = new Thread(new Sapo("Neville"));
+	    
+	    
+		s1.start();
+		s2.start();
+		s3.start();
+		s4.start();
+		s5.start();
 		
 		
 		
 		
 		
-	  
-	
 	}
 
 }
