@@ -1,6 +1,5 @@
 package Corrida;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Sapo extends Thread {
@@ -8,12 +7,11 @@ public class Sapo extends Thread {
 	private int saltoMax = 5;
 	private int saltoAtual;
 	private int distanciaPecorrida = 0;
-	private ArrayList<String> colocacao = new ArrayList<String>();
-	private int distanciaMax = 30;
-	private int i = 0;
+	Corrida race;
 
-	public Sapo(String nome) {
+	public Sapo(String nome, Corrida race) {
 		this.nome = nome;
+		this.race = race;
 	}
 
 	public String getNome() {
@@ -32,14 +30,6 @@ public class Sapo extends Thread {
 		this.saltoMax = saltoMax;
 	}
 
-	public int getDistanciaMax() {
-		return distanciaMax;
-	}
-
-	public void setDistanciaMax(int distanciaMax) {
-		this.distanciaMax = distanciaMax;
-	}
-
 	public int getSaltoAtual() {
 		return saltoAtual;
 	}
@@ -55,16 +45,27 @@ public class Sapo extends Thread {
 	}
 
 	public void run() {
-          Corrida();
-  		  System.out.println(this.nome);
-          return;        
+		Corrida();
+		
+		try {
+			sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		this.race.setI();
+		if(this.race.getI() == 1) {
+			System.out.println("======= Chegada =======");
+		}
+		System.out.println(this.race.getI() + this.nome);
+		return;
 	}
 
 	public void Corrida() {
 		// sortear valor aqui
 		// this.setSaltoAtual(SorteandoValor());
+		
 
-		while (this.getDistanciaPecorrida() < this.getDistanciaMax()) {
+		while (this.getDistanciaPecorrida() < this.race.getDistanciaMax()) {
 			// falta colocar o valor do salto aleatorio
 
 			this.setSaltoAtual(SorteandoValor());
@@ -73,25 +74,26 @@ public class Sapo extends Thread {
 			// falta mostrar o relatorio da corrida
 
 		}
-
+		synchronized (this.nome) {
+			race.add(this.nome);
+		
+		}
 		// Podio();
 
 	}
 
-	public void Podio() {
-		System.out.println("Temos um vencedor:");
-		System.out.println(i++ + "-" + this.nome);
-	}
-
+	/*
+	 * public void Podio() { System.out.println("Temos um vencedor:");
+	 * System.out.println(i++ + "-" + this.nome); }
+	 */
 	public void Relatorio() {
 		System.out.println("=====" + this.getNome() + "=====");
 		System.out.println("tamanho do salto: " + this.getSaltoAtual());
 		System.out.println("distancia pecorrida: " + this.getDistanciaPecorrida());
 
 		try {
-			sleep(1500);
+			sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
