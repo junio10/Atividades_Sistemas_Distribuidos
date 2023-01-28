@@ -1,12 +1,10 @@
 package Corrida;
 
-import java.util.ArrayList;
-
 public class Main {
 
 	public static void main(String[] args) {
-		ArrayList<String> colocacao = new ArrayList<String>();
-		Corrida race = new Corrida(30, colocacao);
+
+		Corrida race = new Corrida(30);
 		Thread s1 = new Thread(new Sapo("Cedrico", race));
 		Thread s2 = new Thread(new Sapo("harry", race));
 		Thread s3 = new Thread(new Sapo("hermione", race));
@@ -18,7 +16,6 @@ public class Main {
 		s3.start();
 		s4.start();
 		s5.start();
-	
 
 	}
 

@@ -46,46 +46,33 @@ public class Sapo extends Thread {
 
 	public void run() {
 		Corrida();
-		
+
 		try {
 			sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		this.race.setI();
-		if(this.race.getI() == 1) {
+		this.race.setColocacao();
+		if (this.race.getColocacao() == 1) {
 			System.out.println("======= Chegada =======");
 		}
-		System.out.println(this.race.getI() + this.nome);
+		System.out.println(this.race.getColocacao() + "-" + this.nome);
 		return;
 	}
 
 	public void Corrida() {
-		// sortear valor aqui
-		// this.setSaltoAtual(SorteandoValor());
-		
-
 		while (this.getDistanciaPecorrida() < this.race.getDistanciaMax()) {
 			// falta colocar o valor do salto aleatorio
-
 			this.setSaltoAtual(SorteandoValor());
 			this.distanciaPecorrida += getSaltoAtual();
 			Relatorio();
 			// falta mostrar o relatorio da corrida
 
 		}
-		synchronized (this.nome) {
-			race.add(this.nome);
-		
-		}
 		// Podio();
 
 	}
 
-	/*
-	 * public void Podio() { System.out.println("Temos um vencedor:");
-	 * System.out.println(i++ + "-" + this.nome); }
-	 */
 	public void Relatorio() {
 		System.out.println("=====" + this.getNome() + "=====");
 		System.out.println("tamanho do salto: " + this.getSaltoAtual());

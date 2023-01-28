@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 public class Corrida {
 	private int distanciaMax = 30;
-	private ArrayList<String> colocacao = new ArrayList<String>();
-    private int i =0;
+	//private ArrayList<String> colocacao = new ArrayList<String>();
+    private int colocacao =0;
 
-	public Corrida(int distanciaMax, ArrayList<String> colocacao) {
+	public Corrida(int distanciaMax) {
 		this.setDistanciaMax(distanciaMax);
-		this.setColocacao(colocacao);
 	}
 
 	public int getDistanciaMax() {
@@ -20,24 +19,12 @@ public class Corrida {
 		this.distanciaMax = distanciaMax;
 	}
 
-	public ArrayList<String> getColocacao() {
+	public int getColocacao() {
 		return colocacao;
 	}
 
-	public void setColocacao(ArrayList<String> colocacao) {
-		this.colocacao = colocacao;
-	}
-	
-	public void add(String sapo) {
-		colocacao.add(sapo);	
-	}
-
-	public int getI() {
-		return i;
-	}
-
-	public void setI() {
-		this.i = i + 1;
+	public void setColocacao() {
+		this.colocacao = colocacao + 1;
 	}
 
 	
